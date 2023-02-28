@@ -1,0 +1,49 @@
+.header {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px;
+  background-color: black;
+  height: 80px;
+  &__logo {
+    width: 139px;
+    height: 51px;
+  }
+  &__favorite {
+    font-family: "Satoshi";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 200px;
+    text-decoration: none;
+    color: white;
+    &__logo {
+      width: 25px;
+      height: 20px;
+    }
+  }
+  &-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 14px 0px;
+    gap: 16px;
+  }
+}
+@media only screen and (max-width: 470px) {
+  .header {
+    padding: 0px 16px;
+    height: 56px;
+    &__favorite {
+      &__text {
+        display: none;
+      }
+    }
+    &__logo {
+      width: 118px;
+      height: 46px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.FavoriteBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+    padding: 104px 0px;
+    gap: 16px;
+  &__text {
+    font-family: "Satoshi";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: white;
+    align-items: center;
+    &__logo {
+      width: 25px;
+      height: 20px;
+    }
+  }
+}
+@media only screen and (max-width: 470px) {
+  .FavoriteBtn__text {
+    display: none;
+  }
+}

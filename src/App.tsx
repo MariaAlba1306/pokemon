@@ -6,7 +6,7 @@ import Header from "./public/features/component/header/header";
 function App() {
   return (
     <div className="App">
-  <Header></Header>
+      <Header />
     </div>
   );
 }

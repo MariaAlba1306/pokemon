@@ -1,4 +1,4 @@
-.FavoriteBtn {
+.Favorite-button {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,7 +18,7 @@
   }
 }
 @media only screen and (max-width: 470px) {
-  .FavoriteBtn__text {
+  .Favorite-button {
     display: none;
   }
 }

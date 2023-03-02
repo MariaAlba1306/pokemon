@@ -1,5 +1,5 @@
 import "./header.scss";
-import FavoriteBtn from "../favoritebtn/favorite";
+import FavoriteBtn from "../favorite-button/favorite-button";
 import logoImage from "assets/images/pokemon_logo.svg";
 
 export default function Header() {

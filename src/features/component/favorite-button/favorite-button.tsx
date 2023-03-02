@@ -1,14 +1,14 @@
 import favoriteIcon from "assets/icons/icon-favorite.svg";
-import "./favoritebtn.scss";
+import "./favorite-button.scss";
 export default function FavoriteBtn() {
   return (
-    <div className="FavoriteBtn">
+    <div className="Favorite-button">
       <a href="#home">
-        <div className="FavoriteBtn__text">
+        <div className="Favorite-button__text">
           <p>FAVORITES</p>
         </div>
       </a>
-      <div className="FavoriteBtn__text__logo">
+      <div className="Favorite-button__text__logo">
         <img src={favoriteIcon} className="" />
       </div>
     </div>

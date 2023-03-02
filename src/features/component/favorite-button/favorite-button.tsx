@@ -1,6 +1,8 @@
 import favoriteIcon from "assets/icons/icon-favorite.svg";
 import "./favorite-button.scss";
-export default function FavoriteBtn() {
+import { FC } from "react";
+
+const FavoriteButton: FC = () => {
   return (
     <div className="Favorite-button">
       <a href="#home">
@@ -13,4 +15,5 @@ export default function FavoriteBtn() {
       </div>
     </div>
   );
-}
+};
+export default FavoriteButton;

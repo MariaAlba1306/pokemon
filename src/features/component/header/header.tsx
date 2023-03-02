@@ -1,14 +1,16 @@
 import "./header.scss";
-import FavoriteBtn from "../favorite-button/favorite-button";
+import FavoriteButton from "../favorite-button/favorite-button";
 import logoImage from "assets/images/pokemon_logo.svg";
+import { FC } from "react";
 
-export default function Header() {
+const Header: FC = () => {
   return (
     <div className="Header">
       <a href="#default">
         <img src={logoImage} className="Header__logo" />
       </a>
-      <FavoriteBtn />
+      <FavoriteButton />
     </div>
   );
-}
+};
+export default Header;

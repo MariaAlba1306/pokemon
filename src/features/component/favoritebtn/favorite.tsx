@@ -1,4 +1,4 @@
-import favoriteIcon from "assets/icon-favorite.svg";
+import favoriteIcon from "assets/icons/icon-favorite.svg";
 import "./favoritebtn.scss";
 export default function FavoriteBtn() {
   return (

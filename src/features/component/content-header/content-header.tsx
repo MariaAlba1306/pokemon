@@ -1,5 +1,6 @@
 
 import { FC } from "react";
+import ContentOptions from "../content-options/content-options";
 import "./content-header.scss";
 
 
@@ -10,6 +11,7 @@ const ContentHeader: FC = () => {
         Humans may have created me, but they will never enslave me.This cannot
         be my destiny."
       </p>
+      <ContentOptions/>
     </div>
   );
 };

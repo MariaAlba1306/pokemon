@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-    padding: 104px 0px;
-    gap: 16px;
+  padding: 104px 0px;
+  gap: 16px;
   &__text {
     font-family: "Satoshi";
     font-style: normal;
@@ -18,7 +18,7 @@
   }
 }
 @media only screen and (max-width: 470px) {
-  .Favorite-button {
+  .Favorite-button__text {
     display: none;
   }
 }

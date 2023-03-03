@@ -8,11 +8,16 @@
     font-family: "Satoshi";
     font-style: normal;
     font-weight: 400;
-    font-size: 34px;
-    line-height: 36px;
+    font-size: 5.5vw;
+    line-height: 5.5vw;
     text-align: center;
     letter-spacing: -1px;
     color: #ffffff;
-     max-width: 450px;
+     max-width: 80%
   }
+}
+@media only screen and (max-width: 470px) {
+ .Content-header__text{
+  display: none;
+ }
 }

@@ -1,0 +1,18 @@
+.Content-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px 0px 20px;
+  background-color: black;
+  &__text {
+    font-family: "Satoshi";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #ffffff;
+     max-width: 450px;
+  }
+}

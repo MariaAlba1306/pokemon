@@ -13,5 +13,7 @@
 @media only screen and (max-width: 470px) {
   .Content-options {
     padding-bottom: 20px;
+    flex-direction: column;
+    gap: 8px;
   }
 }

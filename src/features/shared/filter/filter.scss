@@ -1,0 +1,26 @@
+.Filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5px 14px;
+  gap: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 100px;
+  color: white;
+  background-color: black;
+  &__text {
+    font-size: 13px;
+  }
+  &__icon {
+    width: 10px;
+  }
+}
+button {
+  background-color: none;
+}
+@media only screen and (max-width: 470px) {
+  .Filter {
+    width: 80%;
+  }
+}

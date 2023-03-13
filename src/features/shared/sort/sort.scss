@@ -1,0 +1,30 @@
+.Sort {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5px 6px;
+  gap: 5px;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  color: white;
+  background-color: black;
+  height: 47.8px;
+  &__icon-letter {
+    width: 10px;
+  }
+  &__icon-arrow {
+    width: 15px;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .Sort {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    &__icon-letter {
+      display: none;
+    }
+  }
+}

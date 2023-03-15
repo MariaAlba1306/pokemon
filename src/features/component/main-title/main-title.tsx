@@ -1,5 +1,4 @@
 import { FC } from "react";
-import ContentOptions from "../content-options/content-options";
 import "./main-title.scss";
 
 const MainTitle: FC = () => {
@@ -9,7 +8,6 @@ const MainTitle: FC = () => {
         Humans may have created me, but they will never enslave me.This cannot
         be my destiny."
       </p>
-      <ContentOptions />
     </div>
   );
 };

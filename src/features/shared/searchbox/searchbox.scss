@@ -28,14 +28,12 @@ textarea {
 input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
-@media only screen and (max-width: 548px) {
-  .Searchbox {
-    width: 200px;
-  }
-}
 @media only screen and (max-width: 470px) {
   .Searchbox {
-    width: 100%;
+    width: 90%;
     margin-top: 16px;
+    height: 40px;
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 }

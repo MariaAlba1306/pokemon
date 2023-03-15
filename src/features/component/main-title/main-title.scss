@@ -1,4 +1,4 @@
-.Content-header {
+.MainTitle {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@
   }
 }
 @media only screen and (max-width: 470px) {
-  .Content-header__text {
+  .MainTitle__text {
     display: none;
   }
 }

@@ -2,10 +2,10 @@ import { ChangeEvent, FC } from "react";
 import "./content-options.scss";
 import Searchbox from "features/shared/searchbox/searchbox";
 import Filter from "features/shared/filter/filter";
+import Sort from "features/shared/sort/sort";
 
 const ContentOptions: FC = () => {
-  const handleChange = (value: string) => {
-  };
+  const handleChange = (value: string) => {};
   return (
     <div className="ContentOptions">
       <Searchbox
@@ -14,7 +14,10 @@ const ContentOptions: FC = () => {
           handleChange(event.target.value)
         }
       />
-      <Filter />
+      <div className="ContentOptions__right">
+        <Filter />
+        <Sort />
+      </div>
     </div>
   );
 };

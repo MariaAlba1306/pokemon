@@ -3,7 +3,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 15px;
+<<<<<<< ours
   width: 285px;
+=======
+>>>>>>> theirs
   height: 14px;
   border: 1px solid #ffffff;
   border-radius: 100px;
@@ -28,14 +31,12 @@ textarea {
 input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
-@media only screen and (max-width: 548px) {
-  .Searchbox {
-    width: 200px;
-  }
-}
 @media only screen and (max-width: 470px) {
   .Searchbox {
     width: 90%;
     margin-top: 16px;
+    height: 40px;
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 }

@@ -1,5 +1,4 @@
 import { FC } from "react";
-import ContentOptions from "../content-options/content-options";
 import "./main-title.scss";
 
 const MainTitle: FC = () => {

@@ -5,7 +5,6 @@ import Filter from "features/shared/filter/filter";
 
 const ContentOptions: FC = () => {
   const handleChange = (value: string) => {
-    let searchValue = value;
   };
   return (
     <div className="ContentOptions">

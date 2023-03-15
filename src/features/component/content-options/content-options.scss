@@ -1,4 +1,4 @@
-.Content-options {
+.ContentOptions {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -12,7 +12,7 @@
   background-color: black;
 }
 @media only screen and (max-width: 470px) {
-  .Content-options {
+  .ContentOptions {
     flex-direction: column;
     gap: 8px;
   }

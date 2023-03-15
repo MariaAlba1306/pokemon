@@ -8,7 +8,7 @@ const ContentOptions: FC = () => {
     let searchValue = value;
   };
   return (
-    <div className="Content-options">
+    <div className="ContentOptions">
       <Searchbox
         placeholder="Search Pokemons"
         onChange={(event: ChangeEvent<HTMLInputElement>) =>

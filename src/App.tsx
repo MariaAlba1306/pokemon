@@ -4,6 +4,7 @@ import "./App.scss";
 import Header from "./features/component/header/header";
 import MainTitle from "features/component/main-title/main-title";
 import ContentOptions from "features/component/content-options/content-options";
+import List from "features/component/list/list";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <MainTitle />
       <ContentOptions/>
+      <List/>
     </div>
   );
 }

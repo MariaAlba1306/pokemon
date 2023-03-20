@@ -16,6 +16,7 @@ const Sort: FC = () => {
       setSucess(false);
     }
   }
+
   return (
     <button className="Sort" onClick={saveClickProperty}>
       {success ? sucessImage : defaultImage}

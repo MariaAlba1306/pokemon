@@ -6,6 +6,7 @@ import Sort from "features/shared/sort/sort";
 
 const ContentOptions: FC = () => {
   const handleChange = (value: string) => {};
+
   return (
     <div className="ContentOptions">
       <Searchbox
@@ -14,7 +15,7 @@ const ContentOptions: FC = () => {
           handleChange(event.target.value)
         }
       />
-      <div className="ContentOptions__right">
+      <div className="ContentOptions--right">
         <Filter />
         <Sort />
       </div>

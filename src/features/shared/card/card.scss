@@ -6,7 +6,7 @@
   gap: 32px;
   justify-content: center;
 }
-.Card {
+.card {
   display: flex;
   flex-direction: column;
   // justify-content: center;
@@ -103,11 +103,10 @@
   }
 }
 @media only screen and (max-width: 470px) {
-  .Card {
-    width: 100%;
-  }
-
   .Card-container {
     gap: 16px;
+  }
+  .card {
+    width: 100%;
   }
 }

@@ -8,26 +8,27 @@ const Card: FC = () => {
     <div className="Card-container">
       {cardInfo.map((info) => {
         return (
-          <div className="Card">
-            <div className="Card__image">
-              <div className="Card__favorite"></div>
+          <div className="card">
+            <div className="card__image">
+              <div className="card__favorite"></div>
             </div>
-            <div className="Card__info">
-              <div className="Card__type">
-                <p className="Card__type__text">{info.type}</p>
+            <div className="card__info">
+              <div className="card__type">
+                <p className="card__type__text">{info.type}</p>
               </div>
-              <div className="Card__id">
-                <p className="Card__id__text">{info.id}</p>
+              <div className="card__id">
+                <p className="card__id__text">{info.id}</p>
               </div>
             </div>
-            <div className="Card__name">
-              <p className="Card__name__text">{info.name}</p>
-              <div className="Card__name__location">
+            <div className="card__name">
+              <p className="card__name__text">{info.name}</p>
+              <div className="card__name__location">
                 <img
                   src={locationIcon}
-                  className="Card__name__location__icon"
+                  className="card__name__location__icon"
+                  alt="pokemon image"
                 />
-                <p className="Card__name__location__info">{info.location}</p>
+                <p className="card__name__location__info">{info.location}</p>
               </div>
             </div>
           </div>

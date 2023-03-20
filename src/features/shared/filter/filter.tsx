@@ -1,31 +1,97 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import "./filter.scss";
+const options = [
+  {
+    label: "Type",
+    value: "type",
+  },
+  {
+    label: "Bug",
+    value: "bug",
+  },
+  {
+    label: "Dark",
+    value: "dark",
+  },
+  {
+    label: "Dragon",
+    value: "dragon",
+  },
+  {
+    label: "Electric",
+    value: "electric",
+  },
+  {
+    label: "Fairy",
+    value: "fairy",
+  },
+  {
+    label: "Fighting",
+    value: "fighting",
+  },
+  {
+    label: "Fire",
+    value: "fire",
+  },
+  {
+    label: "Flying",
+    value: "flying",
+  },
+  {
+    label: "Ghost",
+    value: "ghost",
+  },
+  {
+    label: "Grass",
+    value: "grass",
+  },
+  {
+    label: "Ground",
+    value: "ground",
+  },
+  {
+    label: "Ice",
+    value: "ice",
+  },
+  {
+    label: "Normal",
+    value: "normal",
+  },
+  {
+    label: "Poison",
+    value: "poison",
+  },
+  {
+    label: "Psychic",
+    value: "psychic",
+  },
+  {
+    label: "Rock",
+    value: "rock",
+  },
+  {
+    label: "Steel",
+    value: "steel",
+  },
+  {
+    label: "Water",
+    value: "water",
+  },
+];
 
 const Filter: FC = () => {
+  const [option, setSelects] = useState("");
   return (
     <div className="Filter">
-      <select name="select">
-        <option selected disabled>
-          Type
-        </option>
-        <option value="Bug">Bug</option>
-        <option value="Dark">Dark</option>
-        <option value="Dragon">Dragon</option>
-        <option value="Electric">Electric</option>
-        <option value="Fairy">Fairy</option>
-        <option value="Fighting">Fighting</option>
-        <option value="Fire">Fire</option>
-        <option value="Flying">Flying</option>
-        <option value="Ghost">Ghost</option>
-        <option value="Grass">Grass</option>
-        <option value="Ground">Ground</option>
-        <option value="Ice">Ice</option>
-        <option value="Normal">Normal</option>
-        <option value="Poison">Poison</option>
-        <option value="Psychic">Psychic</option>
-        <option value="Rock">Rock</option>
-        <option value="Steel">Steel</option>
-        <option value="Water">Water</option>
+      <select
+        className="Filter__select"
+        value={option}
+        defaultValue="Type"
+        onChange={(e) => setSelects(e.target.value)}
+      >
+        {options.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
       </select>
     </div>
   );

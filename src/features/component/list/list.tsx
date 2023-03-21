@@ -1,12 +1,11 @@
-import { FC } from "react";
-import "./list.scss";
+import { cardInfo } from "./list-info";
 import Card from "features/shared/card/card";
+import "./list.scss";
+import { FC } from "react";
+
 
 const List: FC = () => {
-  return (
-    <div className="List">
-      <Card />
-    </div>
-  );
+  const listItems = cardInfo.map((data) => <Card data={data} />);
+  return <div className="List">{listItems}</div>;
 };
 export default List;

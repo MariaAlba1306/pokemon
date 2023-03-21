@@ -5,7 +5,6 @@ import locationIcon from "assets/icons/location.svg";
 import iconFavorite from "assets/icons/icon-favorite.svg";
 
 const Card: FC = () => {
-
   return (
     <div className="Card-container">
       {cardInfo.map((info) => {
@@ -19,7 +18,13 @@ const Card: FC = () => {
                   className="card__image__space"
                 />
               )}
-              <div className="card__favorite"></div>
+              <div className="card__favorite">
+                <img
+                  src={iconFavorite}
+                  alt="favorite"
+                  className="card__image__favorite"
+                />
+              </div>
             </div>
             <div className="card__info">
               {info.type && (

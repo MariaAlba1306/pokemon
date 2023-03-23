@@ -1,12 +1,4 @@
-.Card-container {
-  background-color: black;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  justify-content: center;
-}
-.card {
+.Card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -19,7 +11,6 @@
   border-radius: 32px;
   &__image {
     display: flex;
-    gap: 10px;
     width: 100%;
     height: 328px;
     background-color: black;
@@ -30,16 +21,12 @@
 
     &__space {
       max-width: 80px;
-      margin: 0 auto;
-      vertical-align: middle;
       z-index: 1;
       position: absolute;
     }
     &__favorite {
       right: 24px;
       top: 24px;
-      width: 25px;
-      height: 20px;
       z-index: 2;
       position: absolute;
     }
@@ -50,11 +37,7 @@
   }
   &__type,
   &__id {
-    display: block;
-    flex-direction: row;
-    align-items: center;
     padding: 4px 8px;
-    gap: 8px;
     width: 79px;
     height: 32px;
     background: #f1f1f1;
@@ -71,15 +54,9 @@
     }
   }
   &__name {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px 12px;
+    padding: 0px 12px 5px;
     width: 193px;
     height: 76px;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
     word-break: break-all;
 
     &__text {
@@ -98,17 +75,9 @@
       align-items: center;
       padding: 0px;
       gap: 8px;
-      width: 168.83px;
       height: 32px;
-      flex: none;
-      order: 0;
-      flex-grow: 0;
+
       &__info {
-        width: 145px;
-        height: 32px;
-        font-family: "Satoshi";
-        font-style: normal;
-        font-weight: 400;
         font-size: 18px;
         line-height: 32px;
         color: #626262;
@@ -121,7 +90,7 @@
   .Card-container {
     gap: 16px;
   }
-  .card {
+  .Card {
     width: 100%;
   }
 }

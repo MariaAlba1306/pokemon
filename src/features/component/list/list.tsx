@@ -3,9 +3,13 @@ import Card from "features/shared/card/card";
 import "./list.scss";
 import { FC } from "react";
 
-
 const List: FC = () => {
-  const listItems = cardInfo.map((data) => <Card data={data} />);
-  return <div className="List">{listItems}</div>;
+  return (
+    <div className="List">
+      {cardInfo.map((data) => {
+        return <Card data={data} />;
+      })}
+    </div>
+  );
 };
 export default List;

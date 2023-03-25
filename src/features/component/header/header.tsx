@@ -11,6 +11,7 @@ const Header: FC = () => {
       </a>
       <FavoriteButton />
     </div>
+
   );
 };
 export default Header;

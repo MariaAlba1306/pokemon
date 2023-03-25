@@ -9,6 +9,10 @@ const ContentOptions: FC = () => {
   return (
     <div className="ContentOptions">
       <Searchbox
+        mode="dark"
+        className="Searchbox__input"
+        size="small"
+        type="search"
         placeholder="Search Pokemons"
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           handleChange(event.target.value)

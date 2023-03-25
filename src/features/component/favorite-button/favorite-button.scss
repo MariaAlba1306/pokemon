@@ -1,9 +1,10 @@
 .Favorite-button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 104px 0px;
-  gap: 16px;
+  &__link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
   &__text {
     font-family: "Satoshi";
     font-style: normal;

@@ -2,4 +2,14 @@
   background-color: black;
   padding: 80px 10% 100px 10%;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+@media only screen and (max-width: 470px) {
+  .List {
+    gap: 16px;
+    padding: 0px 20px 100px 20px;
+  }
 }

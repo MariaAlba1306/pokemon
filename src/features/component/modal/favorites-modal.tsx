@@ -5,21 +5,23 @@ import { ChangeEvent, FC } from "react";
 import Searchbox from "features/shared/searchbox/searchbox";
 import "features/shared/searchbox/searchbox.scss";
 import closeImage from "assets/icons/icon-close.svg";
+
 interface Props {
-  show: boolean;
-  close: any;
+  toggleModal: () => void;
 }
 
-function FavoritesModal({ show, close }: Props) {
-  const handleChange = (value: string) => { };
+function FavoritesModal({ toggleModal }: Props) {
+  const handleChange = (value: string) => {};
   return (
     <>
-      {show ? (
-        <div className="FavoritesModal">
+      <div className="FavoritesModal">
+        <div className="FavoritesModal__modal">
           <img
             src={closeImage}
             className="FavoritesModal__close"
-            onClick={() => close()} />
+            onClick={() => toggleModal()}
+            
+          />
           <div className="FavoritesModal__searchbox">
             <Searchbox
               className="Searchbox__input"
@@ -27,7 +29,10 @@ function FavoritesModal({ show, close }: Props) {
               size="medium"
               type="search-fav"
               placeholder="Search Pokemons"
-              onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event.target.value)} />
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                handleChange(event.target.value)
+              }
+            />
           </div>
           <div className="FavoritesModal__list">
             {favoritesInfo.map((data) => {
@@ -35,7 +40,7 @@ function FavoritesModal({ show, close }: Props) {
             })}
           </div>
         </div>
-      ) : null}
+      </div>
     </>
   );
 }

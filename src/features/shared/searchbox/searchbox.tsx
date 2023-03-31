@@ -17,6 +17,7 @@ const Searchbox: FC<Props> = ({
   size = "medium",
   type = "search",
 }) => {
+  
   return (
     <div className={`Searchbox Searchbox-${mode}`}>
       <input

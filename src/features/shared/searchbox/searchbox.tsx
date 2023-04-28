@@ -1,16 +1,28 @@
 import { ChangeEventHandler, FC } from "react";
 import searchIcon from "assets/icons/icon-search.svg";
-import "./searchbox.scss";
 interface Props {
   placeholder: string;
   onChange: ChangeEventHandler;
+  className: string;
+  mode: string;
+  size: string;
+  type: string;
 }
-const Searchbox: FC<Props> = ({ placeholder, onChange }) => {
+
+const Searchbox: FC<Props> = ({
+  placeholder,
+  onChange,
+  mode = "Searchbox",
+  className = "Searchbox__input",
+  size = "medium",
+  type = "search",
+}) => {
+  
   return (
-    <div className="Searchbox">
+    <div className={`Searchbox Searchbox-${mode}`}>
       <input
-        className="Searchbox__input"
-        type="search"
+        className={`${className}  Searchbox-${size}`}
+        type={type}
         placeholder={placeholder}
         onChange={onChange}
       />

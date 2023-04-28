@@ -7,7 +7,7 @@
   width: 240px;
   height: 350px;
   background: #ffffff;
-  box-shadow: 0px 4px 84px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.35);
   border-radius: 32px;
   &__image {
     display: flex;
@@ -87,7 +87,7 @@
     }
   }
 }
-@media only screen and (max-width: 470px) {
+@media only screen and (max-width: 370px) {
   .Card-container {
     gap: 16px;
   }

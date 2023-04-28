@@ -2,11 +2,18 @@ import { FC, forwardRef, useState } from "react";
 import "./card.scss";
 import locationIcon from "assets/icons/location.svg";
 import iconFavorite from "assets/icons/icon-favorite.svg";
+interface CardProps {
+  id: string;
+  image: string;
+  type: string;
+  name: string;
+  location: string;
+}
 
-const Card = forwardRef(function Card({ data }: any) {
-  const { id, image, type, name, location } = data;
+export function Card({ data }: any) {
+  const { id, image, type, name, location }: CardProps = data;
   return (
-    <div id={name} className="Card">
+    <div id={id} className="Card">
       <div className="Card__image">
         {image && (
           <img src={image} alt="pokemon" className="Card__image__space" />
@@ -46,5 +53,5 @@ const Card = forwardRef(function Card({ data }: any) {
       </div>
     </div>
   );
-});
+}
 export default Card;

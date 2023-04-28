@@ -1,14 +1,22 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import "./filter.scss";
-
-import dropdown from "assets/icons/icon-dropdown.svg";
+import { options } from "./filter.constans";
 
 const Filter: FC = () => {
+  const [option, setSelects] = useState("");
   return (
-    <button className="Filter">
-      <p className="Filter__text">Type</p>
-      <img src={dropdown} className="Filter__icon" alt="filter icon" />
-    </button>
+    <div className="Filter">
+      <select
+        className="Filter__select"
+        value={option}
+        defaultValue="Type"
+        onChange={(e) => setSelects(e.target.value)}
+      >
+        {options.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+    </div>
   );
 };
 export default Filter;

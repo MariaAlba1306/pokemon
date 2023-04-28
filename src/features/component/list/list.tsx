@@ -1,15 +1,7 @@
-import { cardInfo } from "./list-info";
-import Card from "features/shared/card/card";
 import "./list.scss";
-import { FC } from "react";
+import "api/api-service";
 
-const List: FC = () => {
-  return (
-    <div className="List">
-      {cardInfo.map((data) => {
-        return <Card data={data} />;
-      })}
-    </div>
-  );
-};
+export function List({ children }: any) {
+  return <div className="List">{children}</div>;
+}
 export default List;

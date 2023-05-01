@@ -4,6 +4,10 @@ export const options = [
     value: "type",
   },
   {
+    label: "All",
+    value: "All",
+  },
+  {
     label: "Bug",
     value: "bug",
   },

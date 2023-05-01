@@ -7,18 +7,23 @@ import List from "features/component/list/list";
 import FavoritesModal from "features/component/modal/favorites-modal";
 import usePokemon from "hooks/usePokemon";
 import Searchbox from "features/shared/searchbox/searchbox";
-import { getTwentyPokemons } from "api/api-service";
+import {  getTwentyPokemons } from "api/api-service";
 import Card from "features/shared/card/card";
 import UseSearchPokemon from "hooks/useSearchPokemon";
 import Filter from "features/shared/filter/filter";
 import Sort from "features/shared/sort/sort";
 import { InView } from "react-intersection-observer";
+import { fetchPokemonByType } from "api/api-service";
+import UseTypePokemon from "hooks/useTypePokemon";
 
 function App() {
   const { pokemon, setPokemon, loading } = usePokemon();
   const [shouldShowModal, setShouldShowModal] = useState(false);
-  const [pokemonNumber, setPokemonNumber] = useState(0);
+  const [pokemonNumber, setPokemonNumber] = useState(20);
+  const [option, setSelects] = useState("");
+
   let searchedValue = "";
+  let valueType = "";
 
   function toggle(): void {
     setShouldShowModal(!shouldShowModal);
@@ -30,6 +35,7 @@ function App() {
   }
   const onChange = (e: any) => {
     searchedValue = e.target.value.toLowerCase();
+    console.log("ha");
     if (searchedValue == "") {
       UseSearchPokemon(searchedValue, setPokemon);
     }
@@ -46,6 +52,9 @@ function App() {
       setPokemon(initialPokemons);
     });
   };
+  const onChangeFilter = (type: any) => {
+    UseTypePokemon(type.target.value, setPokemon);
+  };
 
   return (
     <div className="App">
@@ -61,8 +70,8 @@ function App() {
           onChange={onChange}
           onKeyDown={onKeyDown}
         />
-        <div className="ContentOptions__right">
-          <Filter />
+        <div className="ContentOptions--right">
+          <Filter onChangeFilter={onChangeFilter} />
           <Sort />
         </div>
       </ContentOptions>

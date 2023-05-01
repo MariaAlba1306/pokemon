@@ -3,10 +3,11 @@ import { useState } from "react";
 
 export default function UseSearchPokemon(keyword: string, setPokemon: any) {
   if (keyword.length > 0) {
-    searchPokemon(keyword).then((searchedPokemon) => {
-      setPokemon(searchedPokemon);
-      console.log("pokemon", searchedPokemon);
-    });
+    searchPokemon(keyword)
+      .then((searchedPokemon) => {
+        setPokemon(searchedPokemon);
+      })
+      .catch((error) => {});
   } else {
     let offset = 20;
     getTwentyPokemons(0, offset).then((initialPokemons) => {

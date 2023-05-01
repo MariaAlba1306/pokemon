@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, forwardRef, useState } from "react";
 import "./card.scss";
 import locationIcon from "assets/icons/location.svg";
 import iconFavorite from "assets/icons/icon-favorite.svg";

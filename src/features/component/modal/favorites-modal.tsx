@@ -12,6 +12,9 @@ interface Props {
 
 function FavoritesModal({ toggleModal }: Props) {
   const handleChange = (value: string) => {};
+  const onKeyDown = () => {
+    console.log("hi");
+  };
   return (
     <>
       <div className="FavoritesModal">
@@ -20,7 +23,6 @@ function FavoritesModal({ toggleModal }: Props) {
             src={closeImage}
             className="FavoritesModal__close"
             onClick={() => toggleModal()}
-            
           />
           <div className="FavoritesModal__searchbox">
             <Searchbox
@@ -32,6 +34,7 @@ function FavoritesModal({ toggleModal }: Props) {
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 handleChange(event.target.value)
               }
+              onKeyDown={onKeyDown}
             />
           </div>
           <div className="FavoritesModal__list">

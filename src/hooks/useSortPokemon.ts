@@ -1,6 +1,7 @@
 
 import {
   fetchPokemonByType,
+  fetchPokemonSort,
   // fetchPokemonSort,
   getTwentyPokemons,
 } from "api/api-service";

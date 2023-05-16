@@ -91,6 +91,9 @@ export const fetchPokemonByType = async (pokemonType: string) => {
 //     return pokemon;
 //   });
 // };
+export const fetchPokemonSort = async (pokemonsDTO: PokemonDTO[],initialSortNumber: number,
+   finalSortNumber: number) => {
+  return pokemonsDTO.sort((a, b) => (a.name > b.name ? initialSortNumber : finalSortNumber));
+};
 
-// //
 

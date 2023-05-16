@@ -7,20 +7,24 @@ import List from "features/component/list/list";
 import FavoritesModal from "features/component/modal/favorites-modal";
 import usePokemon from "hooks/usePokemon";
 import Searchbox from "features/shared/searchbox/searchbox";
-import {  getTwentyPokemons } from "api/api-service";
+import { getTwentyPokemons } from "api/api-service";
 import Card from "features/shared/card/card";
 import UseSearchPokemon from "hooks/useSearchPokemon";
 import Filter from "features/shared/filter/filter";
 import Sort from "features/shared/sort/sort";
 import { InView } from "react-intersection-observer";
-import { fetchPokemonByType } from "api/api-service";
 import UseTypePokemon from "hooks/useTypePokemon";
+interface StateProperties {
+  id: string;
+  name: number;
+}
 
 function App() {
   const { pokemon, setPokemon, loading } = usePokemon();
   const [shouldShowModal, setShouldShowModal] = useState(false);
   const [pokemonNumber, setPokemonNumber] = useState(20);
   const [option, setSelects] = useState("");
+  const [favorites, setFavorites] = useState<StateProperties[]>([]);
 
   let searchedValue = "";
   let valueType = "";
@@ -56,6 +60,17 @@ function App() {
     UseTypePokemon(type.target.value, setPokemon);
   };
 
+  const addFavorite = (pokemonFav: any) => {
+    if (favorites.includes(pokemonFav)) {
+      setFavorites(favorites.filter((a) => a.id !== pokemonFav.id));
+      console.log(favorites);
+    } else {
+      setFavorites([...favorites, pokemonFav]);
+
+      console.log(favorites);
+    }
+  };
+
   return (
     <div className="App">
       <Header toggleModal={toggle} />
@@ -72,16 +87,26 @@ function App() {
         />
         <div className="ContentOptions--right">
           <Filter onChangeFilter={onChangeFilter} />
-          <Sort />
+          <Sort setPokemon={setPokemon} />
         </div>
       </ContentOptions>
       {/* {if (error) <Error />} */}
       <List>
         {!pokemon.length ? (
-          <Card data={pokemon} />
+          <Card
+            data={pokemon}
+            key={`${pokemon}`}
+            onClick={() => addFavorite(pokemon)}
+          />
         ) : (
           pokemon.map((pokemonInfo: any, i) => {
-            return <Card data={pokemonInfo} key={`${pokemonInfo.name}-${i}`} />;
+            return (
+              <Card
+                data={pokemonInfo}
+                key={`${pokemonInfo.id}`}
+                onClick={() => addFavorite(pokemonInfo)}
+              />
+            );
           })
         )}
         {pokemon.length ? (
@@ -92,7 +117,13 @@ function App() {
           ></InView>
         ) : null}
       </List>
-      {shouldShowModal ? <FavoritesModal toggleModal={toggle} /> : null}
+      {shouldShowModal ? (
+        <FavoritesModal toggleModal={toggle}>
+          {favorites.map((data: any) => {
+            return <Card data={data} />;
+          })}
+        </FavoritesModal>
+      ) : null}
       <div className="isVisible"></div>
     </div>
   );

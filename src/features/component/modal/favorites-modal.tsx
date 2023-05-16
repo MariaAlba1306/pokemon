@@ -8,9 +8,10 @@ import closeImage from "assets/icons/icon-close.svg";
 
 interface Props {
   toggleModal: () => void;
+  children: any
 }
 
-function FavoritesModal({ toggleModal }: Props) {
+export function  FavoritesModal({ toggleModal, children }: Props) {
   const handleChange = (value: string) => {};
   const onKeyDown = () => {
     console.log("hi");
@@ -37,11 +38,7 @@ function FavoritesModal({ toggleModal }: Props) {
               onKeyDown={onKeyDown}
             />
           </div>
-          <div className="FavoritesModal__list">
-            {favoritesInfo.map((data) => {
-              return <Card data={data} />;
-            })}
-          </div>
+          <div className="FavoritesModal__list">{children}</div>
         </div>
       </div>
     </>

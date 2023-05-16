@@ -9,9 +9,10 @@ import usePokemon from "hooks/usePokemon";
 const sucessImage = <img src={arrowUp} className="Sort__icon-arrow" />;
 const defaultImage = <img src={arrowDown} className="Sort__icon-arrow" />;
 interface Props {
-  onClick: ChangeEventHandler;
+
+  setPokemon: any;
 }
-const Sort: FC = (setPokemon, { onClick }) => {
+const Sort: FC<Props> = ({ setPokemon }) => {
   const [success, setSucess] = useState(false);
   const [initialSortNumber, setInitialSortNumber] = useState(-1);
   const [finalSortNumber, setFinalSortNumber] = useState(1);

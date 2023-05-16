@@ -1,4 +1,3 @@
-import { ChangeEventHandler, FC, forwardRef, useState } from "react";
 import "./card.scss";
 import locationIcon from "assets/icons/location.svg";
 import iconFavorite from "assets/icons/icon-favorite.svg";
@@ -9,38 +8,30 @@ interface CardProps {
   type: string;
   name: string;
   location: string;
-  favorite: any;
+  isFavorite: boolean;
 }
-interface Props {
-  onClick: ChangeEventHandler;
-}
-export function Card({ data, onClick }: any) {
-  const { id, image, type, name, location, favorite }: CardProps = data;
-  const [isFavorited, setIsFavorited] = useState(favorite);
 
-  function favoriteHeart() {
-    setIsFavorited((isFavorited: any) => !isFavorited);
-  }
+export function Card({ data, onClickFavorite, isFavorite }: any) {
+  const { id, image, type, name, location }: CardProps = data;
+
   return (
     <div id={id} className="Card">
       <div className="Card__image">
         {image && (
           <img src={image} alt="pokemon" className="Card__image__space" />
         )}
-        <div className="Card__favorite" onClick={favoriteHeart}>
-          {!isFavorited ? (
+        <div className="Card__favorite" onClick={onClickFavorite}>
+          {!isFavorite ? (
             <img
               src={iconFavorite}
               alt="favorite"
               className="Card__image__favorite"
-              onClick={onClick}
             />
           ) : (
             <img
               src={iconFavoriteMarked}
               alt="favorite"
               className="Card__image__favorite"
-              onClick={onClick}
             />
           )}
         </div>

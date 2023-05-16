@@ -9,11 +9,12 @@ import usePokemon from "hooks/usePokemon";
 import Searchbox from "features/shared/searchbox/searchbox";
 import { getTwentyPokemons } from "api/api-service";
 import Card from "features/shared/card/card";
-import UseSearchPokemon from "hooks/useSearchPokemon";
+import useSearchPokemon from "hooks/useSearchPokemon";
 import Filter from "features/shared/filter/filter";
 import Sort from "features/shared/sort/sort";
 import { InView } from "react-intersection-observer";
 import UseTypePokemon from "hooks/useTypePokemon";
+import { Pokemon } from "api/pokemon-dto";
 interface StateProperties {
   id: string;
   name: number;
@@ -24,7 +25,7 @@ function App() {
   const [shouldShowModal, setShouldShowModal] = useState(false);
   const [pokemonNumber, setPokemonNumber] = useState(20);
   const [option, setSelects] = useState("");
-  const [favorites, setFavorites] = useState<StateProperties[]>([]);
+  const [favorites, setFavorites] = useState<Pokemon[]>([]);
 
   let searchedValue = "";
   let valueType = "";
@@ -37,38 +38,48 @@ function App() {
       document.body.style.overflow = "scroll";
     }
   }
-  const onChange = (e: any) => {
-    searchedValue = e.target.value.toLowerCase();
-    console.log("ha");
-    if (searchedValue == "") {
-      UseSearchPokemon(searchedValue, setPokemon);
-    }
-  };
 
-  const onKeyDown = async (event: KeyboardEvent<HTMLImageElement>) => {
-    if (event.key === "Enter") {
-      UseSearchPokemon(searchedValue, setPokemon);
-    }
-  };
+  //????
+
+  // const searchPokemon = (e: any) => {
+  //   searchedValue = e.target.value.toLowerCase();
+
+  //   if (searchedValue === "") {
+  //     useSearchPokemon(searchedValue, setPokemon);
+  //   }
+  // };
+
+  // const onKeyDown = async (event: KeyboardEvent<HTMLImageElement>) => {
+  //   if (event.key === "Enter") {
+  //     UseSearchPokemon(searchedValue, setPokemon);
+  //   }
+  // };
+
   const LoadMorePokemons = () => {
     setPokemonNumber((pokemonNumber) => pokemonNumber + 20);
     getTwentyPokemons(0, pokemonNumber).then((initialPokemons) => {
       setPokemon(initialPokemons);
     });
   };
+
   const onChangeFilter = (type: any) => {
     UseTypePokemon(type.target.value, setPokemon);
   };
 
-  const addFavorite = (pokemonFav: any) => {
-    if (favorites.includes(pokemonFav)) {
-      setFavorites(favorites.filter((a) => a.id !== pokemonFav.id));
-      console.log(favorites);
+  const updateFavorites = (pokemonInfo: Pokemon) => {
+    if (isFav(pokemonInfo.id, favorites)) {
+      setFavorites(
+        favorites.filter((favorite) => favorite.id !== pokemonInfo.id)
+      );
     } else {
-      setFavorites([...favorites, pokemonFav]);
-
-      console.log(favorites);
+      setFavorites([...favorites, ...[pokemonInfo]]);
     }
+  };
+
+  const isFav = (id: number, favorites: Pokemon[]) => {
+    const favIds = favorites.map((favorite) => favorite.id);
+
+    return favIds.includes(id);
   };
 
   return (
@@ -82,7 +93,7 @@ function App() {
           size="small"
           type="search"
           placeholder="Search Pokemons"
-          onChange={onChange}
+          onChange={searchPokemon}
           onKeyDown={onKeyDown}
         />
         <div className="ContentOptions--right">
@@ -92,23 +103,18 @@ function App() {
       </ContentOptions>
       {/* {if (error) <Error />} */}
       <List>
-        {!pokemon.length ? (
-          <Card
-            data={pokemon}
-            key={`${pokemon}`}
-            onClick={() => addFavorite(pokemon)}
-          />
-        ) : (
-          pokemon.map((pokemonInfo: any, i) => {
-            return (
-              <Card
-                data={pokemonInfo}
-                key={`${pokemonInfo.id}`}
-                onClick={() => addFavorite(pokemonInfo)}
-              />
-            );
-          })
-        )}
+        {!loading
+          ? pokemon.map((pokemonInfo: any, i) => {
+              return (
+                <Card
+                  data={pokemonInfo}
+                  key={`${pokemonInfo.id}`}
+                  onClickFavorite={() => updateFavorites(pokemonInfo)}
+                  isFavorite={isFav(pokemonInfo.id, favorites)}
+                />
+              );
+            })
+          : null}
         {pokemon.length ? (
           <InView
             onChange={(inView) => {

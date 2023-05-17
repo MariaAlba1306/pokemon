@@ -41,13 +41,13 @@ export const searchPokemon = async (pokemonName: string) => {
 
 export const SearchMapper = (pokemonSearched: any): any => {
   console.log(pokemonSearched);
-  return {
+  return [{
     name: pokemonSearched.name,
     id: pokemonSearched.id,
     type: pokemonSearched.types[0].type.name,
     image: pokemonSearched.sprites.back_default,
     location: "fetchPokemonLocation(pokemon.location_area_encounters)",
-  };
+  }];
 };
 // export const getPokemonTypes = await fetch("https://pokeapi.co/api/v2/type");
 // const types = await getPokemonTypes.json();

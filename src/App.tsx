@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useRef, useState, KeyboardEvent, useEffect } from "react";
+import { useRef, useState, KeyboardEvent, useEffect, ChangeEvent } from "react";
 import Header from "./features/component/header/header";
 import MainTitle from "features/component/main-title/main-title";
 import ContentOptions from "features/component/content-options/content-options";
@@ -15,20 +15,17 @@ import Sort from "features/shared/sort/sort";
 import { InView } from "react-intersection-observer";
 import UseTypePokemon from "hooks/useTypePokemon";
 import { Pokemon } from "api/pokemon-dto";
-interface StateProperties {
-  id: string;
-  name: number;
-}
 
 function App() {
-  const { pokemon, setPokemon, loading } = usePokemon();
+  const { pokemon, setPokemon, loading, setLoading } = usePokemon();
   const [shouldShowModal, setShouldShowModal] = useState(false);
   const [pokemonNumber, setPokemonNumber] = useState(20);
   const [option, setSelects] = useState("");
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
-
-  let searchedValue = "";
-  let valueType = "";
+  const { setSearchTerm, searchPokemonByKeyword } = useSearchPokemon(
+    setPokemon,
+    setLoading
+  );
 
   function toggle(): void {
     setShouldShowModal(!shouldShowModal);
@@ -38,22 +35,6 @@ function App() {
       document.body.style.overflow = "scroll";
     }
   }
-
-  //????
-
-  // const searchPokemon = (e: any) => {
-  //   searchedValue = e.target.value.toLowerCase();
-
-  //   if (searchedValue === "") {
-  //     useSearchPokemon(searchedValue, setPokemon);
-  //   }
-  // };
-
-  // const onKeyDown = async (event: KeyboardEvent<HTMLImageElement>) => {
-  //   if (event.key === "Enter") {
-  //     UseSearchPokemon(searchedValue, setPokemon);
-  //   }
-  // };
 
   const LoadMorePokemons = () => {
     setPokemonNumber((pokemonNumber) => pokemonNumber + 20);
@@ -93,8 +74,10 @@ function App() {
           size="small"
           type="search"
           placeholder="Search Pokemons"
-          onChange={searchPokemon}
-          onKeyDown={onKeyDown}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setSearchTerm(event.target.value.toLowerCase())
+          }
+          onSubmit={searchPokemonByKeyword}
         />
         <div className="ContentOptions--right">
           <Filter onChangeFilter={onChangeFilter} />
@@ -103,18 +86,19 @@ function App() {
       </ContentOptions>
       {/* {if (error) <Error />} */}
       <List>
-        {!loading
-          ? pokemon.map((pokemonInfo: any, i) => {
-              return (
-                <Card
-                  data={pokemonInfo}
-                  key={`${pokemonInfo.id}`}
-                  onClickFavorite={() => updateFavorites(pokemonInfo)}
-                  isFavorite={isFav(pokemonInfo.id, favorites)}
-                />
-              );
-            })
-          : null}
+        {
+          !loading ? 
+          pokemon.map((pokemonInfo: any, i) => {
+            return (
+              <Card
+                data={pokemonInfo}
+                key={`${pokemonInfo.id}`}
+                onClickFavorite={() => updateFavorites(pokemonInfo)}
+                isFavorite={isFav(pokemonInfo.id, favorites)}
+              />
+            );
+          }) : null
+        }
         {pokemon.length ? (
           <InView
             onChange={(inView) => {

@@ -35,7 +35,7 @@ export function  FavoritesModal({ toggleModal, children }: Props) {
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 handleChange(event.target.value)
               }
-              onKeyDown={onKeyDown}
+              onSubmit={() => {}}
             />
           </div>
           <div className="FavoritesModal__list">{children}</div>

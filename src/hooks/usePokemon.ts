@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getTwentyPokemons } from "api/api-service";
-import { error } from "console";
 
 export default function usePokemon() {
   const [pokemon, setPokemon] = useState<any[]>([]);
@@ -19,5 +18,5 @@ export default function usePokemon() {
       });
   }, []);
 
-  return { pokemon, setPokemon, loading, error };
+  return { pokemon, setPokemon, loading, setLoading, error };
 }

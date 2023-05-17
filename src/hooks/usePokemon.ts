@@ -5,6 +5,7 @@ export default function usePokemon() {
   const [pokemon, setPokemon] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [allPokemons, setAllPokemons] = useState(true);
 
   useEffect(() => {
     let offset = 20;
@@ -15,8 +16,17 @@ export default function usePokemon() {
       })
       .catch((error) => {
         setError(true);
+        setAllPokemons(false);
       });
   }, []);
 
-  return { pokemon, setPokemon, loading, setLoading, error };
+  return {
+    pokemon,
+    setPokemon,
+    loading,
+    setLoading,
+    error,
+    allPokemons,
+    setAllPokemons,
+  };
 }

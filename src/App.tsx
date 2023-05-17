@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useRef, useState, KeyboardEvent, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import Header from "./features/component/header/header";
 import MainTitle from "features/component/main-title/main-title";
 import ContentOptions from "features/component/content-options/content-options";
@@ -17,14 +17,22 @@ import UseTypePokemon from "hooks/useTypePokemon";
 import { Pokemon } from "api/pokemon-dto";
 
 function App() {
-  const { pokemon, setPokemon, loading, setLoading } = usePokemon();
+  const {
+    pokemon,
+    setPokemon,
+    loading,
+    setLoading,
+    allPokemons,
+    setAllPokemons,
+  } = usePokemon();
   const [shouldShowModal, setShouldShowModal] = useState(false);
   const [pokemonNumber, setPokemonNumber] = useState(20);
   const [option, setSelects] = useState("");
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
   const { setSearchTerm, searchPokemonByKeyword } = useSearchPokemon(
     setPokemon,
-    setLoading
+    setLoading,
+    setAllPokemons
   );
 
   function toggle(): void {
@@ -35,13 +43,6 @@ function App() {
       document.body.style.overflow = "scroll";
     }
   }
-
-  const LoadMorePokemons = () => {
-    setPokemonNumber((pokemonNumber) => pokemonNumber + 20);
-    getTwentyPokemons(0, pokemonNumber).then((initialPokemons) => {
-      setPokemon(initialPokemons);
-    });
-  };
 
   const onChangeFilter = (type: any) => {
     UseTypePokemon(type.target.value, setPokemon);
@@ -59,10 +60,18 @@ function App() {
 
   const isFav = (id: number, favorites: Pokemon[]) => {
     const favIds = favorites.map((favorite) => favorite.id);
-
     return favIds.includes(id);
   };
 
+  const onEntryInViewHandler = (inView: boolean) => {
+    console.log(inView);
+    if (inView && allPokemons) {
+      setPokemonNumber((pokemonNumber) => pokemonNumber + 20);
+      getTwentyPokemons(0, pokemonNumber).then((initialPokemons) => {
+        setPokemon(initialPokemons);
+      });
+    }
+  };
   return (
     <div className="App">
       <Header toggleModal={toggle} />
@@ -86,35 +95,33 @@ function App() {
       </ContentOptions>
       {/* {if (error) <Error />} */}
       <List>
-        {
-          !loading ? 
-          pokemon.map((pokemonInfo: any, i) => {
-            return (
-              <Card
-                data={pokemonInfo}
-                key={`${pokemonInfo.id}`}
-                onClickFavorite={() => updateFavorites(pokemonInfo)}
-                isFavorite={isFav(pokemonInfo.id, favorites)}
-              />
-            );
-          }) : null
-        }
-        {pokemon.length ? (
-          <InView
-            onChange={(inView) => {
-              LoadMorePokemons();
-            }}
-          ></InView>
-        ) : null}
+        {!loading
+          ? pokemon.map((pokemonInfo: any, i) => {
+              return (
+                <Card
+                  data={pokemonInfo}
+                  key={`${pokemonInfo.id}`}
+                  onClickFavorite={() => updateFavorites(pokemonInfo)}
+                  isFavorite={isFav(pokemonInfo.id, favorites)}
+                />
+              );
+            })
+          : null}
+        {<InView onChange={onEntryInViewHandler}></InView>}
       </List>
       {shouldShowModal ? (
         <FavoritesModal toggleModal={toggle}>
           {favorites.map((data: any) => {
-            return <Card data={data} />;
+            return (
+              <Card
+                data={data}
+                isFavorite={isFav(data.id, favorites)}
+                onClickFavorite={() => updateFavorites(data)}
+              />
+            );
           })}
         </FavoritesModal>
       ) : null}
-      <div className="isVisible"></div>
     </div>
   );
 }

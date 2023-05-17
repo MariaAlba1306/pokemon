@@ -50,7 +50,7 @@ export function Card({ data, onClickFavorite, isFavorite }: any) {
       </div>
       <div className="Card__name">
         <p className="Card__name__text">{name}</p>
-        {location && (
+        {/* {location && (
           <div className="Card__name__location">
             <img
               src={locationIcon}
@@ -59,7 +59,7 @@ export function Card({ data, onClickFavorite, isFavorite }: any) {
             />
             <p className="Card__name__location__info">{location}</p>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

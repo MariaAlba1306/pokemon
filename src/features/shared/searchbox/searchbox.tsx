@@ -22,7 +22,6 @@ const Searchbox: FC<Props> = ({
 
   const searchPokemons = (event: FormEvent) => {
     event.preventDefault();
-
     onSubmit();
   }
 

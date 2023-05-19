@@ -29,6 +29,8 @@ function App() {
   const [pokemonNumber, setPokemonNumber] = useState(20);
   const [option, setSelects] = useState("");
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
+  const [favoritesSearched, setSearchFavorites] = useState("");
+
   const { setSearchTerm, searchPokemonByKeyword } = useSearchPokemon(
     setPokemon,
     setLoading,
@@ -72,6 +74,8 @@ function App() {
       });
     }
   };
+
+  const searchFavorites = () => {};
   return (
     <div className="App">
       <Header toggleModal={toggle} />
@@ -111,15 +115,41 @@ function App() {
       </List>
       {shouldShowModal ? (
         <FavoritesModal toggleModal={toggle}>
-          {favorites.map((data: any) => {
-            return (
-              <Card
-                data={data}
-                isFavorite={isFav(data.id, favorites)}
-                onClickFavorite={() => updateFavorites(data)}
-              />
-            );
-          })}
+          <Searchbox
+            className="Searchbox__input"
+            mode="light"
+            size="medium"
+            type="search-fav"
+            placeholder="Search Pokemons"
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setSearchFavorites(event.target.value.toLowerCase())
+            }
+            onSubmit={searchFavorites}
+          />
+
+          <div className="FavoritesModal__list">
+            {favoritesSearched.length > 0
+              ? favorites
+                  .filter((data) => data.name.includes(favoritesSearched))
+                  .map((filteredName) => {
+                    return (
+                      <Card
+                        data={filteredName}
+                        isFavorite={isFav(filteredName.id, favorites)}
+                        onClickFavorite={() => updateFavorites(filteredName)}
+                      />
+                    );
+                  })
+              : favorites.map((data: any) => {
+                  return (
+                    <Card
+                      data={data}
+                      isFavorite={isFav(data.id, favorites)}
+                      onClickFavorite={() => updateFavorites(data)}
+                    />
+                  );
+                })}
+          </div>
         </FavoritesModal>
       ) : null}
     </div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function useSearchPokemon(
   setPokemon: any,
   setLoading: (state: boolean) => void,
-  setAllPokemons: (state: boolean) => void
+  setAllPokemons: (state: boolean) => void,
 ) {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -12,7 +12,6 @@ export default function useSearchPokemon(
     if (searchTerm.length > 0) {
       setLoading(true);
       setAllPokemons(false);
-
       searchPokemon(searchTerm)
         .then((searchedPokemon) => {
           setLoading(false);

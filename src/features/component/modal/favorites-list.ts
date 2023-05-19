@@ -1,7 +1,7 @@
 export const favoritesInfo = [
   {
-    name: "Goldeen",
-    id: "118",
+    name: "Gldeen",
+    id: "12",
     image:
       "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/118.svg",
   },

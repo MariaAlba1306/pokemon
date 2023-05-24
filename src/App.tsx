@@ -15,6 +15,7 @@ import Sort from "features/shared/sort/sort";
 import { InView } from "react-intersection-observer";
 import UseTypePokemon from "hooks/useTypePokemon";
 import { Pokemon } from "api/pokemon-dto";
+import useSortPokemon from "hooks/useSortPokemon";
 
 function App() {
   const {
@@ -27,14 +28,21 @@ function App() {
   } = usePokemon();
   const [shouldShowModal, setShouldShowModal] = useState(false);
   const [pokemonNumber, setPokemonNumber] = useState(20);
-  const [option, setSelects] = useState("");
+  const [filter, setFilter] = useState(false);
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
   const [favoritesSearched, setSearchFavorites] = useState("");
+  const [isClicked, setClicked] = useState(false);
 
   const { setSearchTerm, searchPokemonByKeyword } = useSearchPokemon(
     setPokemon,
     setLoading,
     setAllPokemons
+  );
+
+  const { searchPokemonBySort } = useSortPokemon(
+    setPokemon,
+    pokemon,
+    setLoading
   );
 
   function toggle(): void {
@@ -48,6 +56,7 @@ function App() {
 
   const onChangeFilter = (type: any) => {
     UseTypePokemon(type.target.value, setPokemon);
+    setFilter(true);
   };
 
   const updateFavorites = (pokemonInfo: Pokemon) => {
@@ -76,6 +85,15 @@ function App() {
   };
 
   const searchFavorites = () => {};
+
+  const isSort = (isClicked: any) => {
+    if (isClicked == false) {
+      setClicked(true);
+    } else {
+      setClicked(false);
+    }
+  };
+
   return (
     <div className="App">
       <Header toggleModal={toggle} />
@@ -94,7 +112,15 @@ function App() {
         />
         <div className="ContentOptions--right">
           <Filter onChangeFilter={onChangeFilter} />
-          <Sort setPokemon={setPokemon} />
+          {filter ? (
+            <Sort
+              onClickSort={(ev: any) => {
+                searchPokemonBySort();
+                isSort(isClicked);
+              }}
+              isSorted={isClicked}
+            />
+          ) : null}
         </div>
       </ContentOptions>
       {/* {if (error) <Error />} */}

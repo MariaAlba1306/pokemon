@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import Header from "./features/component/header/header";
 import MainTitle from "features/component/main-title/main-title";
 import ContentOptions from "features/component/content-options/content-options";
@@ -13,10 +13,10 @@ import useSearchPokemon from "hooks/useSearchPokemon";
 import Filter from "features/shared/filter/filter";
 import Sort from "features/shared/sort/sort";
 import { InView } from "react-intersection-observer";
-import UseTypePokemon from "hooks/useTypePokemon";
 import { Pokemon } from "api/pokemon-dto";
 import useSortPokemon from "hooks/useSortPokemon";
-
+import useTypePokemon from "hooks/useTypePokemon";
+import Error from "features/shared/error/error";
 function App() {
   const {
     pokemon,
@@ -25,39 +25,49 @@ function App() {
     setLoading,
     allPokemons,
     setAllPokemons,
+    setError,
+    error,
   } = usePokemon();
-  const [shouldShowModal, setShouldShowModal] = useState(false);
-  const [pokemonNumber, setPokemonNumber] = useState(20);
-  const [filter, setFilter] = useState(false);
-  const [favorites, setFavorites] = useState<Pokemon[]>([]);
-  const [favoritesSearched, setSearchFavorites] = useState("");
-  const [isClicked, setClicked] = useState(false);
-
   const { setSearchTerm, searchPokemonByKeyword } = useSearchPokemon(
     setPokemon,
     setLoading,
-    setAllPokemons
+    setAllPokemons,
+    setError
   );
-
+  const { searchPokemonByType, setType, type } = useTypePokemon(setPokemon);
   const { searchPokemonBySort } = useSortPokemon(
     setPokemon,
     pokemon,
     setLoading
   );
+  const [shouldShowModal, setShouldShowModal] = useState<boolean>(false);
+  const [pokemonNumber, setPokemonNumber] = useState<number>(20);
+  const [favorites, setFavorites] = useState<Pokemon[]>([]);
+  const [favoritesSearched, setSearchFavorites] = useState<string>("");
+  const [isClicked, setClicked] = useState<boolean>(false);
+  const [newType, setNewType] = useState<string>("All");
 
-  function toggle(): void {
-    setShouldShowModal(!shouldShowModal);
-    if (document.body.style.overflow !== "hidden") {
-      document.body.style.overflow = "hidden";
+  useEffect(() => {
+    if (newType == type) {
+      setType(newType);
+      setNewType(newType);
+      searchPokemonByType();
     } else {
-      document.body.style.overflow = "scroll";
+      searchPokemonByType();
+    }
+  }, [type]);
+
+  async function updateType(newType: any) {
+    setType(newType);
+    searchPokemonByType();
+    if (newType != "All") {
+      setAllPokemons(false);
     }
   }
 
-  const onChangeFilter = (type: any) => {
-    UseTypePokemon(type.target.value, setPokemon);
-    setFilter(true);
-  };
+  function toggle(): void {
+    setShouldShowModal(!shouldShowModal);
+  }
 
   const updateFavorites = (pokemonInfo: Pokemon) => {
     if (isFav(pokemonInfo.id, favorites)) {
@@ -75,7 +85,6 @@ function App() {
   };
 
   const onEntryInViewHandler = (inView: boolean) => {
-    console.log(inView);
     if (inView && allPokemons) {
       setPokemonNumber((pokemonNumber) => pokemonNumber + 20);
       getTwentyPokemons(0, pokemonNumber).then((initialPokemons) => {
@@ -111,8 +120,13 @@ function App() {
           onSubmit={searchPokemonByKeyword}
         />
         <div className="ContentOptions--right">
-          <Filter onChangeFilter={onChangeFilter} />
-          {filter ? (
+          <Filter
+            onChange={(ev: any) => {
+              updateType(ev.target.value);
+            }}
+            type={type}
+          />
+          {type != "All" ? (
             <Sort
               onClickSort={(ev: any) => {
                 searchPokemonBySort();
@@ -123,7 +137,7 @@ function App() {
           ) : null}
         </div>
       </ContentOptions>
-      {/* {if (error) <Error />} */}
+      {error ? <Error /> : null}
       <List>
         {!loading
           ? pokemon.map((pokemonInfo: any, i) => {
@@ -152,7 +166,6 @@ function App() {
             }
             onSubmit={searchFavorites}
           />
-
           <div className="FavoritesModal__list">
             {favoritesSearched.length > 0
               ? favorites

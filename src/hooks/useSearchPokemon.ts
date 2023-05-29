@@ -5,8 +5,9 @@ export default function useSearchPokemon(
   setPokemon: any,
   setLoading: (state: boolean) => void,
   setAllPokemons: (state: boolean) => void,
+  setError: (state: boolean) => void
 ) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const searchPokemonByKeyword = () => {
     if (searchTerm.length > 0) {
@@ -17,13 +18,17 @@ export default function useSearchPokemon(
           setLoading(false);
           setPokemon(searchedPokemon);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          setError(true);
+          console.log("error")
+        });
     } else {
       let offset = 20;
       getTwentyPokemons(0, offset).then((initialPokemons) => {
         setPokemon(initialPokemons);
         setAllPokemons(true);
       });
+      setError(false);
     }
   };
 

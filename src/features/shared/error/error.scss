@@ -1,0 +1,10 @@
+.Error {
+  text-align: center;
+  &__text {
+    color: white;
+    font-family: "Satoshi";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+  }
+}

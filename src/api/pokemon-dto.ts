@@ -36,7 +36,6 @@ export interface Pokemon {
   id: number;
   type: string;
   image: string;
-  location: string;
 }
 export interface PokemonListDTO {
   name: string;

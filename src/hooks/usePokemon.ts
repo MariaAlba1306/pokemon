@@ -3,9 +3,9 @@ import { getTwentyPokemons } from "api/api-service";
 
 export default function usePokemon() {
   const [pokemon, setPokemon] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [allPokemons, setAllPokemons] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const [allPokemons, setAllPokemons] = useState<boolean>(true);
 
   useEffect(() => {
     let offset = 20;
@@ -28,5 +28,6 @@ export default function usePokemon() {
     error,
     allPokemons,
     setAllPokemons,
+    setError,
   };
 }

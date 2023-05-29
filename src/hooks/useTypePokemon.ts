@@ -1,17 +1,19 @@
-import { fetchPokemonByType, getTwentyPokemons } from "api/api-service";
+import { filterPokemonByType, getTwentyPokemons } from "api/api-service";
+import { useState } from "react";
 
-export default async function UseTypePokemon(type: string, setPokemon: any) {
-  if (type == "All") {
-    let offset = 20;
-    getTwentyPokemons(0, offset).then((initialPokemons) => {
-      setPokemon(initialPokemons);
-    });
-  } else {
-    fetchPokemonByType(type).then((typedPokemon) => {
-      setPokemon(typedPokemon);
-    });
-  }
-  
+export default function useTypePokemon(setPokemon: any) {
+  const [type, setType] = useState<string>("All");
+  const searchPokemonByType = () => {
+    if (type == "All") {
+      getTwentyPokemons(0, 20).then((initialPokemons) => {
+        setPokemon(initialPokemons);
+      });
+    } else {
+      filterPokemonByType(type).then((typedPokemon) => {
+        setPokemon(typedPokemon);
+      });
+    }
+  };
 
-  return { setPokemon };
+  return { setType, searchPokemonByType, type };
 }

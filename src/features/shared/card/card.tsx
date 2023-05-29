@@ -7,12 +7,11 @@ interface CardProps {
   image: string;
   type: string;
   name: string;
-  location: string;
   isFavorite: boolean;
 }
 
 export function Card({ data, onClickFavorite, isFavorite }: any) {
-  const { id, image, type, name, location }: CardProps = data;
+  const { id, image, type, name }: CardProps = data;
 
   return (
     <div id={id} className="Card">
@@ -50,16 +49,7 @@ export function Card({ data, onClickFavorite, isFavorite }: any) {
       </div>
       <div className="Card__name">
         <p className="Card__name__text">{name}</p>
-        {/* {location && (
-          <div className="Card__name__location">
-            <img
-              src={locationIcon}
-              className="Card__name__location__icon"
-              alt="pokemon"
-            />
-            <p className="Card__name__location__info">{location}</p>
-          </div>
-        )} */}
+  
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC } from "react";
+import { ChangeEventHandler, FC, FormEvent } from "react";
 import searchIcon from "assets/icons/icon-search.svg";
 interface Props {
   placeholder: string;
@@ -7,19 +7,26 @@ interface Props {
   mode: string;
   size: string;
   type: string;
+  onSubmit: () => void
 }
 
 const Searchbox: FC<Props> = ({
   placeholder,
   onChange,
+  onSubmit,
   mode = "Searchbox",
   className = "Searchbox__input",
   size = "medium",
   type = "search",
 }) => {
-  
+
+  const searchPokemons = (event: FormEvent) => {
+    event.preventDefault();
+    onSubmit();
+  }
+
   return (
-    <div className={`Searchbox Searchbox-${mode}`}>
+    <form className={`Searchbox Searchbox-${mode}`} onSubmit={searchPokemons}>
       <input
         className={`${className}  Searchbox-${size}`}
         type={type}
@@ -27,7 +34,7 @@ const Searchbox: FC<Props> = ({
         onChange={onChange}
       />
       <img src={searchIcon} className="Searchbox__icon" alt="icon_search" />
-    </div>
+    </form>
   );
 };
 export default Searchbox;

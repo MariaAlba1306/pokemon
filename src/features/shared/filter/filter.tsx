@@ -1,16 +1,18 @@
-import { FC, useState } from "react";
+import { ChangeEventHandler, FC } from "react";
 import "./filter.scss";
 import { options } from "./filter.constans";
-
-const Filter: FC = () => {
-  const [option, setSelects] = useState("");
+interface Props {
+  onChange: ChangeEventHandler;
+  type: string;
+}
+const Filter: FC<Props> = ({ onChange, type }) => {
   return (
     <div className="Filter">
       <select
         className="Filter__select"
-        value={option}
+        value={type}
         defaultValue="Type"
-        onChange={(e) => setSelects(e.target.value)}
+        onChange={onChange}
       >
         {options.map((option) => (
           <option value={option.value}>{option.label}</option>

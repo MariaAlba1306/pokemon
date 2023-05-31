@@ -1,7 +1,5 @@
 import favoriteIcon from "assets/icons/icon-favorite.svg";
 import "./favorite-button.scss";
-import { FC, useState } from "react";
-import FavoritesModal from "../modal/favorites-modal";
 
 interface Props {
   toggleModal: () => void;

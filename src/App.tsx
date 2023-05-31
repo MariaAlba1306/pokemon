@@ -79,7 +79,7 @@ function App() {
     }
   };
 
-  const isFav = (id: number, favorites: Pokemon[]) => {
+  const isFav = (id: number, favorites: Pokemon[]): boolean => {
     const favIds = favorites.map((favorite) => favorite.id);
     return favIds.includes(id);
   };
@@ -93,7 +93,6 @@ function App() {
     }
   };
 
-  const searchFavorites = () => {};
 
   const isSort = (isClicked: any) => {
     if (isClicked == false) {
@@ -121,14 +120,14 @@ function App() {
         />
         <div className="ContentOptions--right">
           <Filter
-            onChange={(ev: any) => {
+            onChange={(ev: ChangeEvent<HTMLInputElement>) => {
               updateType(ev.target.value);
             }}
             type={type}
           />
           {type != "All" ? (
             <Sort
-              onClickSort={(ev: any) => {
+              onClickSort={() => {
                 searchPokemonBySort();
                 isSort(isClicked);
               }}
@@ -164,7 +163,7 @@ function App() {
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setSearchFavorites(event.target.value.toLowerCase())
             }
-            onSubmit={searchFavorites}
+            onSubmit={() => {}}
           />
           <div className="FavoritesModal__list">
             {favoritesSearched.length > 0

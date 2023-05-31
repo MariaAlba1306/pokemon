@@ -2,14 +2,17 @@ import { getTwentyPokemons, searchPokemon } from "api/api-service";
 import { useState } from "react";
 
 export default function useSearchPokemon(
-  setPokemon: any,
+  setPokemon: React.Dispatch<React.SetStateAction<object[]>>,
   setLoading: (state: boolean) => void,
   setAllPokemons: (state: boolean) => void,
   setError: (state: boolean) => void
-) {
+): {
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  searchPokemonByKeyword: () => void;
+} {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const searchPokemonByKeyword = () => {
+  const searchPokemonByKeyword = (): void => {
     if (searchTerm.length > 0) {
       setLoading(true);
       setAllPokemons(false);
@@ -20,7 +23,6 @@ export default function useSearchPokemon(
         })
         .catch((error) => {
           setError(true);
-          console.log("error")
         });
     } else {
       let offset = 20;

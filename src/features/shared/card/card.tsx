@@ -10,9 +10,14 @@ interface CardProps {
   isFavorite: boolean;
 }
 
-export function Card({ data, onClickFavorite, isFavorite }: any) {
-  const { id, image, type, name }: CardProps = data;
+interface CardElementProps {
+  data: any;
+  onClickFavorite: React.MouseEventHandler;
+  isFavorite: boolean;
+}
 
+export function Card({ data, onClickFavorite, isFavorite }: CardElementProps) {
+  const { id, image, type, name }: CardProps = data;
   return (
     <div id={id} className="Card">
       <div className="Card__image">
@@ -49,7 +54,6 @@ export function Card({ data, onClickFavorite, isFavorite }: any) {
       </div>
       <div className="Card__name">
         <p className="Card__name__text">{name}</p>
-  
       </div>
     </div>
   );

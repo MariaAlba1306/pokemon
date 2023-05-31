@@ -6,8 +6,8 @@ import letters from "assets/icons/icon-letter.svg";
 const sucessImage = <img src={arrowUp} className="Sort__icon-arrow" />;
 const defaultImage = <img src={arrowDown} className="Sort__icon-arrow" />;
 interface Props {
-  onClickSort: any;
-  isSorted: boolean
+  onClickSort: React.MouseEventHandler;
+  isSorted: boolean;
 }
 
 export function Sort({ onClickSort, isSorted }: Props) {

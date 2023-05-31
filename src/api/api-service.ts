@@ -38,7 +38,7 @@ export const searchPokemon = async (pokemonName: string) => {
   return SearchMapper(pokemonSearched);
 };
 
-export const SearchMapper = (pokemonSearched: any): any => {
+export const SearchMapper = (pokemonSearched: any): object[] => {
   return [
     {
       name: pokemonSearched.name,
@@ -54,10 +54,10 @@ export const filterPokemonByType = async (pokemonType: string) => {
   const pokemonTypeUrl = await fetch(`${BASE_URL}/type/${pokemonType}`);
   const json = await pokemonTypeUrl.json();
   const pokemonListType = json.pokemon;
+
   const pokemonTypeInfo = pokemonListType.map(async (pokemonListType: any) => {
     const pokemonInfo = await fetch(pokemonListType.pokemon.url);
     const json: any[] = await pokemonInfo.json();
-
     return json;
   });
   const pokemonsDTO: PokemonDTO[] = await Promise.all(pokemonTypeInfo);
